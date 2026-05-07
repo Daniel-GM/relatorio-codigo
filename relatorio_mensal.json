@@ -1,0 +1,109 @@
+{
+  "relatorio": [
+    {
+      "mes": "2025-12",
+      "total_linhas": 116,
+      "delta_linhas": 116,
+      "media_linhas_por_dia": 3.7,
+      "dias_no_mes": 31,
+      "por_extensao": {
+        ".js": 42,
+        ".html": 15,
+        ".jsx": 58,
+        ".css": 1
+      },
+      "commit": "1742d0e",
+      "mensagem": "Refatora estrutura do App e NavMenu para incluir rotas e componentes de forma mais organizada"
+    },
+    {
+      "mes": "2026-01",
+      "total_linhas": 11331,
+      "delta_linhas": 11215,
+      "media_linhas_por_dia": 361.8,
+      "dias_no_mes": 31,
+      "por_extensao": {
+        ".php": 2808,
+        ".js": 121,
+        ".html": 14,
+        ".jsx": 8285,
+        ".css": 103
+      },
+      "commit": "529b77a",
+      "mensagem": "Adiciona página de Login e ajusta rotas no aplicativo"
+    },
+    {
+      "mes": "2026-02",
+      "total_linhas": 20399,
+      "delta_linhas": 9068,
+      "media_linhas_por_dia": 323.9,
+      "dias_no_mes": 28,
+      "por_extensao": {
+        ".php": 6329,
+        ".js": 849,
+        ".html": 14,
+        ".css": 118,
+        ".jsx": 13089
+      },
+      "commit": "4012363",
+      "mensagem": "Remover label \"Mês\" do componente InputText no AnaliseComissao"
+    },
+    {
+      "mes": "2026-03",
+      "total_linhas": 38475,
+      "delta_linhas": 18076,
+      "media_linhas_por_dia": 583.1,
+      "dias_no_mes": 31,
+      "por_extensao": {
+        ".php": 13975,
+        ".js": 1383,
+        ".html": 14,
+        ".css": 118,
+        ".jsx": 22985
+      },
+      "commit": "a605881",
+      "mensagem": "adiciona middleware de autenticação e refatora contexto de autenticação para gerenciar sessões"
+    },
+    {
+      "mes": "2026-04",
+      "total_linhas": 52081,
+      "delta_linhas": 13606,
+      "media_linhas_por_dia": 453.5,
+      "dias_no_mes": 30,
+      "por_extensao": {
+        ".php": 19578,
+        ".js": 2220,
+        ".html": 20,
+        ".css": 379,
+        ".jsx": 29884
+      },
+      "commit": "ba9cf38",
+      "mensagem": "Corrige erros de acentuação e ortografia nos relatórios PDF, melhorando a clareza do texto."
+    },
+    {
+      "mes": "2026-05",
+      "total_linhas": 54705,
+      "delta_linhas": 2624,
+      "media_linhas_por_dia": 84.6,
+      "dias_no_mes": 31,
+      "por_extensao": {
+        ".php": 20404,
+        ".js": 2266,
+        ".html": 20,
+        ".css": 379,
+        ".jsx": 31636
+      },
+      "commit": "ee3ca53",
+      "mensagem": "Adiciona componente Comparador de Planilhas com funcionalidade de upload e comparação de dados, além de atualizar o NavMenu para incluir nova rota e permissões."
+    }
+  ],
+  "estatisticas": {
+    "total_atual": 54705,
+    "media_variacao_mensal": 9117.5,
+    "media_variacao_diaria": 301.8,
+    "previsao_12_meses": 164115,
+    "meses_analisados": 6,
+    "primeiro_commit": "2025-12-31T17:09:38",
+    "dias_desde_inicio": 126,
+    "media_historica_linhas_por_dia": 434.2
+  }
+}
