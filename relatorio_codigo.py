@@ -5,6 +5,7 @@ import sys
 from datetime import datetime, date, timezone
 from collections import defaultdict
 import statistics
+import re
 
 INCLUDE_EXTS = {".php", ".js", ".jsx", ".ts", ".tsx", ".css", ".html", ".vue", ".py", ".dart", ".h", ".cpp", ".swift", ""}
 
@@ -51,6 +52,70 @@ def get_first_commit_date():
             except:
                 continue
     return None
+
+
+def detect_language(filepath, text):
+    """Detecta linguagem por conteúdo/nome para arquivos sem extensão."""
+    filename = os.path.basename(filepath).lower()
+
+    # Nomes de arquivo bem conhecidos
+    known_names = {
+        "makefile": "Makefile",
+        "dockerfile": "Dockerfile",
+        "dockerfile.prod": "Dockerfile",
+        "dockerfile.dev": "Dockerfile",
+        "rakefile": ".rb",
+        "gemfile": ".rb",
+        "vagrantfile": ".rb",
+        "brewfile": ".rb",
+        "jenkinsfile": "Jenkinsfile",
+        "cmakelists.txt": "CMake",
+        "podfile": ".rb",
+        "guardfile": ".rb",
+        "capfile": ".rb",
+        "thorfile": ".rb",
+    }
+    if filename in known_names:
+        return known_names[filename]
+
+    lines = text.split("\n", 5)
+    if not lines:
+        return ""
+
+    first_line = lines[0].strip()
+
+    # Shebang
+    if first_line.startswith("#!"):
+        cmd = first_line[2:].strip()
+        parts = cmd.split()
+        if len(parts) >= 2 and parts[0].endswith("env"):
+            interpreter = parts[1].lower()
+        elif parts:
+            interpreter = os.path.basename(parts[0]).lower()
+        else:
+            interpreter = None
+
+        shebang_map = {
+            "python": ".py", "python3": ".py", "python2": ".py",
+            "ruby": ".rb",
+            "node": ".js", "nodejs": ".js",
+            "bash": ".sh", "sh": ".sh", "zsh": ".sh", "fish": ".sh", "ksh": ".sh",
+            "perl": ".pl", "perl5": ".pl",
+            "php": ".php",
+            "swift": ".swift",
+            "dart": ".dart",
+            "go": ".go",
+            "rustc": ".rs", "rust": ".rs",
+        }
+        if interpreter in shebang_map:
+            return shebang_map[interpreter]
+
+    # Heurísticas por conteúdo (primeiras 5 linhas)
+    sample = "\n".join(lines[:5])
+    if "<?php" in sample or "<?=" in sample:
+        return ".php"
+
+    return ""
 
 
 class GitCatFileBatch:
@@ -136,7 +201,12 @@ def count_lines_at_commit(commit_hash, batch):
         except Exception:
             continue
         lines = len(text.split("\n"))
-        files_by_ext[ext] += lines
+        key = ext
+        if key == "":
+            detected = detect_language(filepath, text)
+            if detected:
+                key = detected
+        files_by_ext[key] += lines
         total += lines
 
     return total, dict(files_by_ext)
