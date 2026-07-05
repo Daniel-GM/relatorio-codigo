@@ -36,6 +36,25 @@ function fmtMonth(iso) {
   return `${names[parseInt(m, 10) - 1]}/${y.slice(2)}`;
 }
 
+function fmtDurationParts(days) {
+  if (days == null) return null;
+
+  const years = Math.floor(days / 365);
+  const daysAfterYears = days % 365;
+  const months = Math.floor(daysAfterYears / 30);
+  const weeks = Math.floor((daysAfterYears % 30) / 7);
+
+  const parts = [];
+  if (years > 0) parts.push(`${years} anos`);
+  if (months > 0) parts.push(`${months} meses`);
+  if (weeks > 0) parts.push(`${weeks} sem.`);
+
+  if (parts.length === 0) return null;
+  if (parts.length === 1) return parts[0];
+  if (parts.length === 2) return `${parts[0]} e ${parts[1]}`;
+  return `${parts[0]}, ${parts[1]} e ${parts[2]}`;
+}
+
 // # App
 
 export default function App() {
@@ -111,6 +130,7 @@ export default function App() {
                 label="Dias desde início"
                 value={derived.estatisticas.dias_desde_inicio ?? "–"}
                 sub="desde o 1º commit"
+                detail={fmtDurationParts(derived.estatisticas.dias_desde_inicio)}
               />
               <StatCard
                 label="Média histórica"
