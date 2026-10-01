@@ -83,7 +83,7 @@ export function BarChart({
   const options = {
     responsive: true,
     maintainAspectRatio: false,
-    layout: { padding: { left: 24, top: showValues ? 12 : 0 } },
+    layout: { padding: { top: showValues ? 12 : 0 } },
     plugins: {
       legend: { display: false },
       barValueLabels: {
@@ -115,6 +115,9 @@ export function BarChart({
         border: { display: false },
       },
       y: {
+        afterFit: (scale) => {
+          scale.width = Math.max(scale.width, 68);
+        },
         ticks: {
           color: dark ? "#a1a1aa" : "#52525b",
           padding: 6,
