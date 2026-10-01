@@ -149,11 +149,7 @@ export default function App() {
           {/* Charts grid */}
           {derived && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              <ChartCard
-                title="Total de Linhas Acumuladas"
-                className="sm:col-span-2"
-                chartHeight="h-[280px]"
-              >
+              <ChartCard title="Total de Linhas Acumuladas">
                 <LineChart
                   labels={derived.labels}
                   data={derived.totais}
@@ -161,6 +157,16 @@ export default function App() {
                   tooltipFormatter={(v) =>
                     ` ${v.toLocaleString("pt-BR")} linhas acumuladas`
                   }
+                />
+              </ChartCard>
+
+              <ChartCard
+                title={`Linhas por Extensão (${derived.labels[derived.labels.length - 1]})`}
+              >
+                <DoughnutChart
+                  labels={derived.extLabels}
+                  data={derived.extValues}
+                  dark={dark}
                 />
               </ChartCard>
 
@@ -181,23 +187,17 @@ export default function App() {
                 />
               </ChartCard>
 
-              <ChartCard title="Média de Linhas/Dia">
+              <ChartCard
+                title="Média de Linhas/Dia"
+                className="sm:col-span-2"
+                chartHeight="h-[280px]"
+              >
                 <BarChart
                   labels={derived.labels}
                   data={derived.medias}
                   dark={dark}
                   color="green"
                   tooltipFormatter={(v) => ` ${v.toFixed(1)} linhas/dia`}
-                />
-              </ChartCard>
-
-              <ChartCard
-                title={`Linhas por Extensão (${derived.labels[derived.labels.length - 1]})`}
-              >
-                <DoughnutChart
-                  labels={derived.extLabels}
-                  data={derived.extValues}
-                  dark={dark}
                 />
               </ChartCard>
             </div>
