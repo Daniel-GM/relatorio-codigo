@@ -149,7 +149,11 @@ export default function App() {
           {/* Charts grid */}
           {derived && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              <ChartCard title="Total de Linhas Acumuladas">
+              <ChartCard
+                title="Total de Linhas Acumuladas"
+                className="sm:col-span-2"
+                chartHeight="h-[280px]"
+              >
                 <LineChart
                   labels={derived.labels}
                   data={derived.totais}

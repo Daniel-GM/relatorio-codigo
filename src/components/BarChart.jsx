@@ -80,6 +80,7 @@ export function BarChart({
   const options = {
     responsive: true,
     maintainAspectRatio: false,
+    layout: { padding: { left: 12, top: showValues ? 12 : 0 } },
     plugins: {
       legend: { display: false },
       barValueLabels: {
@@ -110,7 +111,12 @@ export function BarChart({
         border: { display: false },
       },
       y: {
-        ticks: { color: muted, font: { size: 11, family: "Inter" } },
+        ticks: {
+          color: dark ? "#a1a1aa" : "#52525b",
+          padding: 6,
+          font: { size: 12, family: "Inter" },
+          callback: (value) => Number(value).toLocaleString("pt-BR"),
+        },
         grid: { color: gridColor },
         border: { display: false },
       },
