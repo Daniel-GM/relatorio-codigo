@@ -29,7 +29,9 @@ const valueLabelsPlugin = {
       if (!Number.isFinite(value)) return;
 
       const { x, y } = bar.getProps(["x", "y"], true);
-      const label = `${value > 0 ? "+" : ""}${value.toLocaleString("pt-BR")}`;
+      const label = options.formatter
+        ? options.formatter(value)
+        : `${value > 0 ? "+" : ""}${value.toLocaleString("pt-BR")}`;
       const halfLabelWidth = ctx.measureText(label).width / 2;
       const labelX = Math.min(
         chartArea.right - halfLabelWidth,
@@ -53,6 +55,7 @@ export function BarChart({
   color = "red",
   tooltipFormatter,
   showValues = false,
+  valueLabelFormatter,
 }) {
   const palette = {
     red: dark ? "#dd6974" : "#e05252",
@@ -80,7 +83,7 @@ export function BarChart({
   const options = {
     responsive: true,
     maintainAspectRatio: false,
-    layout: { padding: { left: 12, top: showValues ? 12 : 0 } },
+    layout: { padding: { left: 24, top: showValues ? 12 : 0 } },
     plugins: {
       legend: { display: false },
       barValueLabels: {
@@ -88,6 +91,7 @@ export function BarChart({
         color: textColor,
         fontSize: 11,
         offset: 8,
+        formatter: valueLabelFormatter,
       },
       tooltip: {
         backgroundColor: surfBg,

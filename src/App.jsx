@@ -197,6 +197,13 @@ export default function App() {
                   data={derived.medias}
                   dark={dark}
                   color="green"
+                  showValues
+                  valueLabelFormatter={(v) =>
+                    v.toLocaleString("pt-BR", {
+                      minimumFractionDigits: 1,
+                      maximumFractionDigits: 1,
+                    })
+                  }
                   tooltipFormatter={(v) => ` ${v.toFixed(1)} linhas/dia`}
                 />
               </ChartCard>
