@@ -160,14 +160,19 @@ export default function App() {
                 />
               </ChartCard>
 
-              <ChartCard title="Variação Mensal (Delta)">
+              <ChartCard
+                title="Variação Mensal (Delta)"
+                className="sm:col-span-2"
+                chartHeight="h-[280px]"
+              >
                 <BarChart
                   labels={derived.labels}
                   data={derived.deltas}
                   dark={dark}
                   color="red"
+                  showValues
                   tooltipFormatter={(v) =>
-                    ` +${v.toLocaleString("pt-BR")} linhas`
+                    ` ${v > 0 ? "+" : ""}${v.toLocaleString("pt-BR")} linhas`
                   }
                 />
               </ChartCard>
